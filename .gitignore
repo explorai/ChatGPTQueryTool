@@ -1,0 +1,7 @@
+.env
+.json
+/dataset/*.csv
+/data/*.json
+/error_logs/*.json
+/data/*.csv
+/data/*.json
