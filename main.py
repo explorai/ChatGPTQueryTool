@@ -106,12 +106,26 @@ class chatGPTBot:
         return
 
 
+class whisperGPTBot:
+    def __init__(self, model):
+        self.model = model
+        self.GPT_token = os.getenv("CHAT_GPT_TOKEN")
+        openai.api_key = self.GPT_token
+
+    def call(self, file):
+        audio = open(file, "rb")
+        text = openai.Audio.transcribe(self.model, audio)
+        return text
+
+
 def main():
-    chat = chatGPTBot("gpt-3.5-turbo", "dataset/all_bb_distinct_options.csv")
-    context = "You are instructed to only respond in JSON format and you must provide synonyms to these car manufacturer options."
-    query = "give me correct JSON format ONLY (ONLY JSON DATA, VERY IMPORTANT) with options as the keys and 1d array of 6 synonyms as value of this following array of vehicle manufacturer car options:"
-    chat.process(60, query, context)
-    chat.export("data/dataset_synonyms_test_2.csv", "csv")
+    # chat = chatGPTBot("gpt-3.5-turbo", "dataset/all_bb_distinct_options.csv")
+    # context = "You are instructed to only respond in JSON format and you must provide synonyms to these car manufacturer options."
+    # query = "give me correct JSON format ONLY (ONLY JSON DATA, VERY IMPORTANT) with options as the keys and 1d array of 6 synonyms as value of this following array of vehicle manufacturer car options:"
+    # chat.process(60, query, context)
+    # chat.export("data/dataset_synonyms_test_2.csv", "csv")
+    chat = whisperGPTBot("whisper-1")
+    print(chat.call("audio/Deep Learning In 5 Minutes.mp3"))
 
 
 if __name__ == "__main__":

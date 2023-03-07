@@ -1,5 +1,7 @@
 .env
 .json
+/audio/*.mp3
+/audio/*.m4a
 /dataset/*.csv
 /data/*.json
 /error_logs/*.json
